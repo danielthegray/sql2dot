@@ -6,9 +6,12 @@ The script reads the SQL from `stdin` and outputs the `dot` script to `stdout`.
 
 Example:
 
-`./sql2dot.pl < table_defs.sql > table_graph.dot`
+    ./sql2dot.pl < table_defs.sql > table_graph.dot
 
 You can than use any `dot` implementation (like GraphViz) to output the graph to your preferred format (PS, SVG, PNG, etc.)
+For example:
+
+    dot -O -Tpng table_graph.dot
 
 ## Explanation
 The script simply finds `CREATE TABLE ` entries, and saves up the column names until it finds a `);`. It also parses **inline** `REFERENCES` statements to other tables, (like `userId BIGINT REFERENCES User(id)`) and creates a link between those 2 items in the graph. I have not fiddled much with the arrows (feel free to contribute!).
